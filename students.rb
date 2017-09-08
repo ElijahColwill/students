@@ -49,3 +49,26 @@ end
 
 puts "Which girls have green eyes?"
 puts green_eyed_girls(students, eye_colors)
+
+def sophomore_vowels(students, ages)
+	most_vowels = students[0]
+	max_vowels = 0
+	students.each_with_index do |current_name, i|
+		vowels = 0
+		if ages[i] == 15
+			current_name.chars.each do |char|
+				if char.downcase == "a" || char.downcase == "e" || char.downcase == "i" || char.downcase == "o" || char.downcase == "u" 
+					vowels += 1
+				end 
+			end
+			if vowels > max_vowels
+				max_vowels = vowels
+				most_vowels = current_name
+			end
+		end
+	end
+	return most_vowels
+end
+
+puts "Which sophomore has the most vowels in their name?"
+puts sophomore_vowels(students, ages)
