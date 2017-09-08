@@ -11,8 +11,8 @@ end
 
 def brown_eyes(eye_colors)
 	num = 0
-	eye_colors.each do |i|
-		if i == "Brown"
+	eye_colors.each do |color|
+		if color == "Brown"
 			num += 1
 		end
 	end
@@ -21,3 +21,16 @@ end
 
 puts "How many students have brown_eyes?"
 puts brown_eyes(eye_colors)
+
+def can_drive(students, ages)
+	who_can_drive = []
+	ages.each_with_index do |age, i|
+		if age > 15
+			who_can_drive.push(students[i].strip)
+		end
+	end
+	return who_can_drive
+end
+
+puts "Which students can drive?"
+puts can_drive(students, ages)
