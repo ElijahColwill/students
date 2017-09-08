@@ -9,6 +9,15 @@ File.open("student_data.csv").each do |line|
 	ages.push(info[2].strip.to_i)
 end
 
-print students, "\n"
-print eye_colors, "\n"
-print ages, "\n"
+def brown_eyes(eye_colors)
+	num = 0
+	eye_colors.each do |i|
+		if i == "Brown"
+			num += 1
+		end
+	end
+	return num
+end
+
+puts "How many students have brown_eyes?"
+puts brown_eyes(eye_colors)
