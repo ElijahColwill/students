@@ -34,3 +34,18 @@ end
 
 puts "Which students can drive?"
 puts can_drive(students, ages)
+
+def green_eyed_girls(students, eye_colors)
+	green_eyed_girls_array = []
+	eye_colors.each_with_index do |color, i|
+		if not i.odd?
+			if color == "Green"
+				green_eyed_girls_array.push(students[i].strip) 
+			end
+		end
+	end
+	return green_eyed_girls_array
+end
+
+puts "Which girls have green eyes?"
+puts green_eyed_girls(students, eye_colors)
