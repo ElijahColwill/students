@@ -2,6 +2,7 @@ students = []
 eye_colors = []
 ages = []
 heights = []
+blood_types = []
 
 File.open("student_data.csv").each do |line|
 	info = line.split(",")
@@ -10,6 +11,7 @@ File.open("student_data.csv").each do |line|
 	ages.push(info[2].strip.to_i)
 	height = (info[3].strip.to_i * 12) + info[4].strip.to_i
 	heights.push(height)
+	blood_types.push(info[5].strip)
 end
 
 def brown_eyes(eye_colors)
@@ -92,8 +94,40 @@ def average_height(heights)
 	heights.each do |height|
 		sum += height
 	end
-	return (sum / heights.length)
+	return (sum.to_f / heights.length)
 end
 
 puts "What is the average height of the students in inches?"
 puts average_height(heights)
+
+def blood_donation(students, blood_types, student_name)
+	student = 0
+	donors = []
+	student_type = ""
+	students.each_with_index do |student, i|
+		if student == student_name
+			student_type = blood_types[i]
+		end
+	end
+	avalible_types = []
+	if student_type == "A"
+		avalible_types.push("A", "AB")
+	elsif student_type == "B"
+		avalible_types.push("B", "AB")
+	elsif student_type == "O"
+		avalible_types.push("A", "B", "O", "AB")
+	elsif student_type == "AB"
+		avalible_types.push("AB")
+	end
+	blood_types.each_with_index do |type, i|
+		if avalible_types.include? type
+			donors.push(students[i])
+		end
+	end
+	return donors
+end
+
+puts "Which people can donate blood to a secific student given their blood type?"
+puts blood_donation(students, blood_types, "Wendy")
+puts "---"
+puts blood_donation(students, blood_types, "Yolanda")
