@@ -100,6 +100,14 @@ end
 puts "What is the average height of the students in inches?"
 puts average_height(heights)
 
+def in_array(array, check_value)
+	array.each do |value|
+		if value == check_value
+			return true
+		end
+	end
+	return false
+end
 def blood_donation(students, blood_types, student_name)
 	student = 0
 	donors = []
@@ -111,16 +119,16 @@ def blood_donation(students, blood_types, student_name)
 	end
 	avalible_types = []
 	if student_type == "A"
-		avalible_types.push("A", "AB")
+		avalible_types = ["A", "AB"]
 	elsif student_type == "B"
-		avalible_types.push("B", "AB")
+		avalible_types = ["B", "AB"]
 	elsif student_type == "O"
-		avalible_types.push("A", "B", "O", "AB")
+		avalible_types = ["A", "B", "O", "AB"]
 	elsif student_type == "AB"
-		avalible_types.push("AB")
+		avalible_types = ["AB"]
 	end
 	blood_types.each_with_index do |type, i|
-		if avalible_types.include? type
+		if in_array(avalible_types, type)
 			donors.push(students[i])
 		end
 	end
@@ -129,5 +137,32 @@ end
 
 puts "Which people can donate blood to a secific student given their blood type?"
 puts blood_donation(students, blood_types, "Wendy")
-puts "---"
-puts blood_donation(students, blood_types, "Yolanda")
+
+def most_blood(students, blood_types)
+	max_donors = 0
+	highest_donor_round_1 = ""
+	highest_donors = []
+	
+	students.each_with_index do |student_name, i|
+		donors = blood_donation(students, blood_types, student_name)
+		if donors.length > max_donors
+			max_donors = donors.length
+			highest_donor_round_1 = student_name
+		end
+	end
+
+	highest_donors.push(highest_donor_round_1)
+	students.each_with_index do |student_name, i|
+		donors = blood_donation(students, blood_types, student_name)
+		if donors.length == max_donors
+			if student_name != highest_donor_round_1
+				highest_donors.push(student_name)
+			end
+		end
+	end
+	
+	return highest_donors, max_donors
+end
+
+puts "Which student has the highest number of donors, and how many?"
+puts most_blood(students, blood_types)
