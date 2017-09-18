@@ -183,3 +183,22 @@ end
 
 puts "What is the average age of the green eyed students?"
 puts average_green_eyed_girls(students, ages, eye_colors)
+
+def closest_to_average_green_eyes(students, ages, eye_colors)
+	average = average_green_eyed_girls(students, ages, eye_colors)
+	distance_to_average = 150
+	student = ""
+	eye_colors.each_with_index do |color, i|
+		distance_to_age = (ages[i] - average).abs
+		if color == "Green"	
+			if distance_to_age < distance_to_average
+				distance_to_average = distance_to_age
+				student = students[i]
+			end
+		end
+	end
+	return student
+end
+
+puts "Which green eyed student is closest to the average?"
+puts closest_to_average_green_eyes(students, ages, eye_colors)
