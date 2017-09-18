@@ -108,6 +108,7 @@ def in_array(array, check_value)
 	end
 	return false
 end
+
 def blood_donation(students, blood_types, student_name)
 	student = 0
 	donors = []
@@ -166,3 +167,19 @@ end
 
 puts "Which student has the highest number of donors, and how many?"
 puts most_blood(students, blood_types)
+
+def average_green_eyed_girls(students, ages, eye_colors)
+	greenEyedGirls = []
+	sum = 0
+	eye_colors.each_with_index do |color, i|
+		if color == "Green"
+			greenEyedGirls.push(students[i])
+			sum += ages[i] 
+		end
+	end
+	average = sum.to_f / (greenEyedGirls.length)
+	return average
+end
+
+puts "What is the average age of the green eyed students?"
+puts average_green_eyed_girls(students, ages, eye_colors)
